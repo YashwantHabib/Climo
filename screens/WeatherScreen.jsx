@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -11,18 +11,28 @@ import {
 import {Bolt} from 'lucide-react-native';
 import WeatherSlider from '../components/WeatherSlider';
 import ForecastBar from '../components/ForecastBar';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+} from 'react-native-reanimated';
 
 const WeatherScreen = ({navigation}) => {
+  const [weather, setWeather] = useState({
+    temp: 28,
+    condition: 'Sunny',
+    icon: 'https://cdn-icons-png.flaticon.com/128/5825/5825968.png',
+  });
+
   return (
     <SafeAreaView style={styles.container}>
-      {/* Transparent status bar for seamless UI */}
       <StatusBar
         backgroundColor="transparent"
         translucent
         barStyle="dark-content"
       />
 
-      {/* Top Bar with Location and Settings Icon */}
+      {/* Top Bar */}
       <View style={styles.topBar}>
         <Text style={[styles.text, styles.location]}>Bagalkot</Text>
         <Pressable
@@ -32,35 +42,43 @@ const WeatherScreen = ({navigation}) => {
         </Pressable>
       </View>
 
-      {/* Weather Information */}
+      {/* Weather Info with Animation */}
       <View style={styles.content}>
-        <WeatherInfo />
+        <WeatherInfo weather={weather} />
         <WeatherControls />
-        <ForecastBar />
+        <ForecastBar onSelect={setWeather} />
       </View>
     </SafeAreaView>
   );
 };
 
-const WeatherInfo = () => (
-  <View style={styles.weatherInfo}>
-    <Image
-      source={{uri: 'https://cdn-icons-png.flaticon.com/128/5825/5825968.png'}}
-      style={styles.weatherIcon}
-    />
-    <Text style={[styles.text, styles.temperature]}>28</Text>
-    <Text style={styles.text}>Sunny</Text>
-  </View>
-);
+const WeatherInfo = ({weather}) => {
+  const scale = useSharedValue(0.5);
+
+  React.useEffect(() => {
+    scale.value = withSpring(1, {damping: 5, stiffness: 120});
+  }, [weather]);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{scale: scale.value}],
+    opacity: scale.value,
+  }));
+
+  return (
+    <Animated.View style={[styles.weatherInfo, animatedStyle]}>
+      <Image source={{uri: weather.icon}} style={styles.weatherIcon} />
+      <Text style={[styles.text, styles.temperature]}>{weather.temp}</Text>
+      <Text style={styles.text}>{weather.condition}</Text>
+    </Animated.View>
+  );
+};
 
 const WeatherControls = () => (
   <View style={styles.sliderContainer}>
-    {/* NOW Button */}
     <View style={styles.nowContainer}>
       <Pressable style={styles.circularButton} onPress={() => {}} />
       <Text style={styles.nowText}>NOW</Text>
     </View>
-    {/* Weather Forecast Slider */}
     <WeatherSlider />
   </View>
 );
@@ -75,10 +93,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: 'bold',
-    fontFamily: 'Sigmar-Regular',
-  },
-  location: {
-    fontSize: 14,
     textAlign: 'center',
   },
   topBar: {
@@ -102,8 +116,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   weatherIcon: {
-    width: '30%',
-    aspectRatio: 1,
+    width: 120,
+    height: 120,
   },
   temperature: {
     fontSize: 100,

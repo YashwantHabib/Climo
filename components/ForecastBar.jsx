@@ -1,44 +1,51 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
 
 const forecastData = [
   {
     day: 'MON',
     icon: 'https://cdn-icons-png.flaticon.com/128/9420/9420939.png',
     temp: 25,
+    condition: 'Cloudy',
   },
   {
     day: 'TUE',
     icon: 'https://cdn-icons-png.flaticon.com/128/5828/5828361.png',
     temp: 27,
+    condition: 'Rainy',
   },
   {
     day: 'WED',
     icon: 'https://cdn-icons-png.flaticon.com/128/5828/5828361.png',
     temp: 28,
+    condition: 'Partly Cloudy',
   },
   {
     day: 'THU',
     icon: 'https://cdn-icons-png.flaticon.com/128/5825/5825968.png',
     temp: 30,
+    condition: 'Sunny',
   },
   {
     day: 'FRI',
     icon: 'https://cdn-icons-png.flaticon.com/128/5825/5825968.png',
     temp: 29,
+    condition: 'Sunny',
   },
 ];
 
-const ForecastBar = () => {
+const ForecastBar = ({onSelect}) => {
   return (
     <View style={styles.container}>
       {forecastData.map((item, index) => (
-        <View key={index} style={styles.card}>
+        <Pressable
+          key={index}
+          style={styles.card}
+          onPress={() => onSelect(item)}>
           <Text style={[styles.text, styles.day]}>{item.day}</Text>
           <Image source={{uri: item.icon}} style={styles.icon} />
-
-          <Text style={[styles.text, styles.temp]}>{item.temp}</Text>
-        </View>
+          <Text style={[styles.text, styles.temp]}>{item.temp}°</Text>
+        </Pressable>
       ))}
     </View>
   );
@@ -58,6 +65,8 @@ const styles = StyleSheet.create({
   },
   card: {
     alignItems: 'center',
+    padding: 8,
+    borderRadius: 10,
   },
   day: {
     fontSize: 14,
@@ -69,8 +78,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   icon: {
-    width: 25,
-    aspectRatio: 1,
+    width: 40,
+    height: 40,
   },
 });
 
