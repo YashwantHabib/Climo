@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Bayon-Regular.ttf",
+      "sha1": "0d8549222724fb3bcb1866869889e412f575db99"
+    },
+    {
+      "path": "assets/fonts/Sigmar-Regular.ttf",
+      "sha1": "0e9137d14a466d6e9ee41c2abc4378c3364e9c01"
+    }
+  ]
+}
