@@ -12,7 +12,6 @@
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		DEEEE03390BF43A28E9FE0DD /* Bayon-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CF00ECB9A0747ACA15B3322 /* Bayon-Regular.ttf */; };
-		8891D2E0563B40E1AD95911F /* Sigmar-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CF172AF1DF24CBA8DE6061C /* Sigmar-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +37,6 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Climo/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		7CF00ECB9A0747ACA15B3322 /* Bayon-Regular.ttf */ = {isa = PBXFileReference; name = "Bayon-Regular.ttf"; path = "../assets/fonts/Bayon-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1CF172AF1DF24CBA8DE6061C /* Sigmar-Regular.ttf */ = {isa = PBXFileReference; name = "Sigmar-Regular.ttf"; path = "../assets/fonts/Sigmar-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +123,6 @@
 			isa = "PBXGroup";
 			children = (
 				7CF00ECB9A0747ACA15B3322 /* Bayon-Regular.ttf */,
-				1CF172AF1DF24CBA8DE6061C /* Sigmar-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -201,7 +198,6 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				DEEEE03390BF43A28E9FE0DD /* Bayon-Regular.ttf in Resources */,
-				8891D2E0563B40E1AD95911F /* Sigmar-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -49,7 +49,7 @@ const WeatherInfo = () => (
       style={styles.weatherIcon}
     />
     <Text style={[styles.text, styles.temperature]}>28</Text>
-    <Text style={styles.text}>SUNNY</Text>
+    <Text style={styles.text}>Sunny</Text>
   </View>
 );
 
@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     fontFamily: 'Sigmar-Regular',
-    textTransform: 'uppercase',
   },
   location: {
     fontSize: 14,
