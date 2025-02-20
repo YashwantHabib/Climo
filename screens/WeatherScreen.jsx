@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
   },
   location: {
     fontSize: 14,
+    textAlign: 'center',
   },
   topBar: {
     flexDirection: 'row',
