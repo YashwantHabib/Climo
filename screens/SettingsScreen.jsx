@@ -145,7 +145,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: 'bold',
-    fontFamily: 'Sigmar-Regular',
+    textTransform: 'uppercase',
+    fontFamily: 'sans-serif-condensed',
     color: 'white',
   },
   topBar: {
@@ -180,12 +181,16 @@ const styles = StyleSheet.create({
   settingText: {
     color: 'white',
     fontSize: 16,
+    textTransform: 'uppercase',
+    fontFamily: 'sans-serif-condensed',
   },
   sectionTitle: {
     color: 'white',
     fontSize: 14,
     fontWeight: 'bold',
     marginTop: 20,
+    textTransform: 'uppercase',
+    fontFamily: 'sans-serif-condensed',
   },
   toggleContainer: {
     flexDirection: 'row',
@@ -216,6 +221,8 @@ const styles = StyleSheet.create({
 
   toggleText: {
     color: 'gray',
+    textTransform: 'uppercase',
+    fontFamily: 'sans-serif-condensed',
   },
 
   toggleTextActive: {
