@@ -19,6 +19,11 @@ import {
   fadeInOutAnimation,
 } from '../utils/weatherAnimations';
 import styles from '../styles/weatherStyles';
+import RainEffect from '../components/RainEffect';
+import ThunderEffect from '../components/ThunderEffect';
+import SnowEffect from '../components/SnowEffect';
+import MistEffect from '../components/MistEffect';
+import TornadoEffect from '../components/TornadoEffect';
 
 const WeatherScreen = ({navigation}) => {
   const [weather, setWeather] = useState({
@@ -77,7 +82,9 @@ const WeatherScreen = ({navigation}) => {
           </>
         )}
         {weather.condition === 'Clear' && (
-          <SunEffect sunParticles={sunParticles} />
+          <>
+            <TornadoEffect />
+          </>
         )}
 
         <WeatherSlider />
