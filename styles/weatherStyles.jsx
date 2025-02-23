@@ -26,15 +26,7 @@ const styles = StyleSheet.create({
   weatherInfo: {alignItems: 'center'},
   weatherIcon: {width: '30%', aspectRatio: 1},
   temperature: {fontSize: 120},
-  sunParticles: {
-    position: 'absolute',
-    width: 10,
-    height: 10,
-    backgroundColor: 'yellow',
-    borderRadius: 5,
-    top: 100,
-    left: '50%',
-  },
+
   cloudImage: {
     position: 'absolute',
     width: 150,

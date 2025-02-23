@@ -3,7 +3,7 @@ import {Animated, View, StyleSheet, Dimensions} from 'react-native';
 
 const {height, width} = Dimensions.get('window');
 
-const NUM_RAINDROPS = 30;
+const NUM_RAINDROPS = 50;
 
 const RainEffect = () => {
   const rainAnimations = useRef(
@@ -15,7 +15,7 @@ const RainEffect = () => {
       return Animated.loop(
         Animated.timing(anim, {
           toValue: 1,
-          duration: 1200 + Math.random() * 600,
+          duration: 500 + Math.random() * 600,
           useNativeDriver: true,
         }),
       );
@@ -28,7 +28,7 @@ const RainEffect = () => {
       {rainAnimations.map((anim, index) => {
         const translateY = anim.interpolate({
           inputRange: [0, 1],
-          outputRange: [-50, height - 200],
+          outputRange: [-50, height / 2],
         });
         const translateX = anim.interpolate({
           inputRange: [0, 1],

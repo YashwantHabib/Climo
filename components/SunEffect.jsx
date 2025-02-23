@@ -1,65 +1,46 @@
-import React from 'react';
-import {Animated, Easing} from 'react-native';
-import styles from '../styles/weatherStyles';
+import React, {useEffect, useRef} from 'react';
+import {Animated, StyleSheet} from 'react-native';
 
-const SunEffect = ({sunParticles}) => {
-  const glowAnim = new Animated.Value(1);
-  const rotateAnim = new Animated.Value(0);
+const SunEffect = () => {
+  const glowAnim = useRef(new Animated.Value(1)).current;
 
-  Animated.loop(
-    Animated.sequence([
-      Animated.timing(glowAnim, {
-        toValue: 1.5,
-        duration: 1000,
-        easing: Easing.linear,
-        useNativeDriver: true,
-      }),
-      Animated.timing(glowAnim, {
-        toValue: 1,
-        duration: 1000,
-        easing: Easing.linear,
-        useNativeDriver: true,
-      }),
-    ]),
-  ).start();
-
-  Animated.loop(
-    Animated.timing(rotateAnim, {
-      toValue: 1,
-      duration: 4000,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    }),
-  ).start();
-
-  const spin = rotateAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg'],
-  });
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(glowAnim, {
+          toValue: 2, // Slight pulsating effect
+          duration: 1500,
+          useNativeDriver: true,
+        }),
+        Animated.timing(glowAnim, {
+          toValue: 1,
+          duration: 1500,
+          useNativeDriver: true,
+        }),
+      ]),
+    ).start();
+  }, []);
 
   return (
     <Animated.View
       style={[
-        styles.sunParticles,
-        {
-          transform: [
-            {
-              translateY: sunParticles.interpolate({
-                inputRange: [0, 1],
-                outputRange: [30, -30],
-              }),
-            },
-            {scale: glowAnim},
-            {rotate: spin},
-          ],
-          opacity: sunParticles.interpolate({
-            inputRange: [0, 1],
-            outputRange: [1, 0],
-          }),
-        },
+        styles.sunParticle,
+        {transform: [{scale: glowAnim}]}, // Only pulsates, no movement
       ]}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  sunParticle: {
+    position: 'absolute',
+    width: 10,
+    height: 10,
+    backgroundColor: 'yellow',
+    borderRadius: 5,
+    top: 100,
+    left: '50%',
+  },
+});
 
 export default SunEffect;

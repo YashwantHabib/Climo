@@ -3,7 +3,7 @@ import {Animated, View, StyleSheet, Dimensions} from 'react-native';
 
 const {height, width} = Dimensions.get('window');
 
-const NUM_SNOWFLAKES = 20;
+const NUM_SNOWFLAKES = 50;
 
 const SnowEffect = () => {
   const snowAnimations = useRef(
@@ -28,7 +28,7 @@ const SnowEffect = () => {
       {snowAnimations.map((anim, index) => {
         const translateY = anim.interpolate({
           inputRange: [0, 1],
-          outputRange: [-50, height - 200],
+          outputRange: [-50, height / 2],
         });
         const translateX = anim.interpolate({
           inputRange: [0, 1],

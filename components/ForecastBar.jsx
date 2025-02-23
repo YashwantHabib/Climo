@@ -12,19 +12,19 @@ const forecastData = [
     day: 'TUE',
     icon: 'https://cdn-icons-png.flaticon.com/128/5825/5825968.png',
     temp: 27,
-    condition: 'Clouds',
+    condition: 'Rain',
   },
   {
     day: 'WED',
     icon: 'https://cdn-icons-png.flaticon.com/128/5825/5825968.png',
     temp: 28,
-    condition: 'Clouds',
+    condition: 'Mist',
   },
   {
     day: 'THU',
     icon: 'https://cdn-icons-png.flaticon.com/128/5825/5825968.png',
     temp: 30,
-    condition: 'Clear',
+    condition: 'Snow',
   },
   {
     day: 'FRI',

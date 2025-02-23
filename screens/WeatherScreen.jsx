@@ -81,11 +81,10 @@ const WeatherScreen = ({navigation}) => {
             />
           </>
         )}
-        {weather.condition === 'Clear' && (
-          <>
-            <TornadoEffect />
-          </>
-        )}
+        {weather.condition === 'Mist' && <MistEffect />}
+        {weather.condition === 'Rain' && <RainEffect />}
+        {weather.condition === 'Snow' && <SnowEffect />}
+        {weather.condition === 'Clear' && <SunEffect />}
 
         <WeatherSlider />
         <ForecastBar onSelectWeather={updateWeather} />
