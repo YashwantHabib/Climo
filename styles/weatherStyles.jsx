@@ -3,15 +3,16 @@ import {StyleSheet, StatusBar} from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'gray',
+    backgroundColor: '#171717',
     alignItems: 'center',
     paddingTop: StatusBar.currentHeight,
   },
   text: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
     textTransform: 'uppercase',
+    color: 'white',
   },
   topBar: {
     flexDirection: 'row',
@@ -20,11 +21,16 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingVertical: 10,
   },
-  refresh: {position: 'absolute', right: 16},
+  refresh: {margin: 10},
   icon: {position: 'absolute', right: 16},
-  content: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  content: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingBottom: '20',
+  },
   weatherInfo: {alignItems: 'center'},
-  weatherIcon: {width: '30%', aspectRatio: 1},
+  weatherIcon: {width: '200', height: '200'},
   temperature: {fontSize: 120},
 
   cloudImage: {

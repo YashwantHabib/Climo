@@ -4,35 +4,41 @@ import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
 const forecastData = [
   {
     day: 'MON',
-    icon: 'https://cdn-icons-png.flaticon.com/128/9420/9420939.png',
+    icon: 'Sun',
     temp: 25,
     condition: 'Clouds',
   },
   {
     day: 'TUE',
-    icon: 'https://cdn-icons-png.flaticon.com/128/5825/5825968.png',
+    icon: 'Sun',
     temp: 27,
     condition: 'Rain',
   },
   {
     day: 'WED',
-    icon: 'https://cdn-icons-png.flaticon.com/128/5825/5825968.png',
+    icon: 'Moon',
     temp: 28,
     condition: 'Mist',
   },
   {
     day: 'THU',
-    icon: 'https://cdn-icons-png.flaticon.com/128/5825/5825968.png',
+    icon: 'Moon',
     temp: 30,
     condition: 'Snow',
   },
   {
     day: 'FRI',
-    icon: 'https://cdn-icons-png.flaticon.com/128/5825/5825968.png',
+    icon: 'Cloud',
     temp: 29,
     condition: 'Clear',
   },
 ];
+
+const weatherIcons = {
+  Sun: require('../assets/weatherIcons/Sun.png'),
+  Moon: require('../assets/weatherIcons/Moon.png'),
+  Cloud: require('../assets/weatherIcons/Cloud.png'),
+};
 
 const ForecastBar = ({onSelectWeather}) => {
   return (
@@ -43,7 +49,7 @@ const ForecastBar = ({onSelectWeather}) => {
           style={styles.card}
           onPress={() => onSelectWeather(item)}>
           <Text style={[styles.text, styles.day]}>{item.day}</Text>
-          <Image source={{uri: item.icon}} style={styles.icon} />
+          <Image source={weatherIcons[item.icon]} style={styles.icon} />
           <Text style={[styles.text, styles.temp]}>{item.temp}</Text>
         </Pressable>
       ))}
@@ -56,6 +62,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     fontFamily: 'sans-serif-condensed',
+    color: 'white',
   },
   container: {
     width: '70%',
@@ -70,7 +77,7 @@ const styles = StyleSheet.create({
   day: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#d1d1d1',
   },
   temp: {
     fontSize: 18,
@@ -78,7 +85,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     width: 25,
-    aspectRatio: 1,
+    height: 25,
   },
 });
 

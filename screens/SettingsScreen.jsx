@@ -135,12 +135,12 @@ const IconPackOption = ({title, selected, onPress}) => (
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#1E1E1E',
+    backgroundColor: '#171717',
   },
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#1E1E1E',
+    backgroundColor: '#171717',
   },
   text: {
     fontSize: 20,

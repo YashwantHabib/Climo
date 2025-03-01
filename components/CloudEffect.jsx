@@ -5,7 +5,7 @@ import styles from '../styles/weatherStyles';
 const CloudEffect = ({cloudAnim, cloudImageStyle}) => {
   return (
     <Animated.Image
-      source={{uri: 'https://cdn-icons-png.flaticon.com/128/9420/9420939.png'}}
+      source={require('../assets/weatherIcons/Cloud.png')}
       style={[
         cloudImageStyle || styles.cloudImage, // Default style if none is provided
         {
@@ -17,10 +17,7 @@ const CloudEffect = ({cloudAnim, cloudImageStyle}) => {
               }),
             },
           ],
-          opacity: cloudAnim.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [0.7, 0.9, 0.7],
-          }),
+
           resizeMode: 'contain', // Ensure the image is not cropped
         },
       ]}

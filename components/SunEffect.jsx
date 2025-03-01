@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 10,
     height: 10,
-    backgroundColor: 'yellow',
+    backgroundColor: '#ffa200',
     borderRadius: 5,
     top: 100,
     left: '50%',

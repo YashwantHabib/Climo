@@ -27,7 +27,7 @@ import TornadoEffect from '../components/TornadoEffect';
 
 const WeatherScreen = ({navigation}) => {
   const [weather, setWeather] = useState({
-    icon: 'https://cdn-icons-png.flaticon.com/128/5825/5825968.png',
+    icon: 'Sun',
     temp: 28,
     condition: 'Clear',
   });
@@ -51,7 +51,7 @@ const WeatherScreen = ({navigation}) => {
       <StatusBar
         backgroundColor="transparent"
         translucent
-        barStyle="dark-content"
+        barStyle="light-content"
       />
 
       <View style={styles.topBar}>
@@ -59,17 +59,11 @@ const WeatherScreen = ({navigation}) => {
         <Pressable
           style={styles.icon}
           onPress={() => navigation.navigate('Settings')}>
-          <Bolt color="black" size={24} />
+          <Bolt color="white" size={24} />
         </Pressable>
       </View>
 
       <View style={styles.content}>
-        <Pressable
-          style={styles.refresh}
-          onPress={() => updateWeather(weather)}>
-          <RefreshCwIcon color="black" size={24} />
-        </Pressable>
-
         <WeatherInfo weather={weather} fadeAnim={fadeAnim} />
 
         {weather.condition === 'Clouds' && (
@@ -85,7 +79,11 @@ const WeatherScreen = ({navigation}) => {
         {weather.condition === 'Rain' && <RainEffect />}
         {weather.condition === 'Snow' && <SnowEffect />}
         {weather.condition === 'Clear' && <SunEffect />}
-
+        <Pressable
+          style={styles.refresh}
+          onPress={() => updateWeather(weather)}>
+          <RefreshCwIcon color="white" size={24} />
+        </Pressable>
         <WeatherSlider />
         <ForecastBar onSelectWeather={updateWeather} />
       </View>

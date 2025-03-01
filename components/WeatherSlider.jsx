@@ -18,21 +18,6 @@ const WeatherSlider = () => {
   const position = useRef(new Animated.Value(0)).current;
   const currentIndex = useRef(0);
 
-  // Thumb color logic
-  const getThumbColor = index => {
-    if (index === 0) return 'orange'; // Step 1
-    if (index === 1 || index === 3) return '#FFC000'; // Step 2 & 4 (Intermediate)
-    if (index === 2) return 'yellow'; // Step 3
-    if (index === 4) return 'orange'; // Step 5
-    if (index === 5) return 'white'; // Step 6
-    return 'yellow';
-  };
-
-  const thumbColor = position.interpolate({
-    inputRange: STEPS.map((_, i) => i * STEP_WIDTH),
-    outputRange: STEPS.map((_, i) => getThumbColor(i)),
-  });
-
   // Handles slider movement
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
@@ -66,7 +51,6 @@ const WeatherSlider = () => {
             styles.thumb,
             {
               transform: [{translateX: position}],
-              backgroundColor: thumbColor,
             },
           ]}
           {...panResponder.panHandlers}
@@ -94,7 +78,7 @@ const styles = StyleSheet.create({
   track: {
     width: SLIDER_WIDTH,
     height: 40,
-    backgroundColor: '#949494',
+    backgroundColor: '#262626',
     borderRadius: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -104,15 +88,15 @@ const styles = StyleSheet.create({
   dot: {
     width: 4,
     height: 4,
-    backgroundColor: '#5a4a42',
+    backgroundColor: '#737373',
     borderRadius: 3,
   },
   thumb: {
+    backgroundColor: 'white',
     position: 'absolute',
     width: THUMB_SIZE,
     height: THUMB_SIZE,
     borderRadius: THUMB_SIZE / 2,
-    top: -10,
     shadowColor: '#000', // Black shadow
     shadowOffset: {width: 0, height: 4}, // Offset shadow
     shadowOpacity: 0.3, // Shadow visibility
@@ -127,6 +111,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'sans-serif-condensed',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    color: 'white',
   },
   stepLabel: {
     fontSize: 14,
