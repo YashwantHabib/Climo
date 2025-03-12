@@ -55,7 +55,7 @@ const WeatherScreen = ({navigation}) => {
       />
 
       <View style={styles.topBar}>
-        <Text style={[styles.text, styles.location]}>Bagalkot</Text>
+        <Text style={[styles.text, styles.location]}>Bagalkote</Text>
         <Pressable
           style={styles.icon}
           onPress={() => navigation.navigate('Settings')}>

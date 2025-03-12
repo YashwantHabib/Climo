@@ -28,7 +28,7 @@ const RainEffect = () => {
       {rainAnimations.map((anim, index) => {
         const translateY = anim.interpolate({
           inputRange: [0, 1],
-          outputRange: [-50, height / 2],
+          outputRange: [-50, height],
         });
         const translateX = anim.interpolate({
           inputRange: [0, 1],

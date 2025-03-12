@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     paddingBottom: '20',
   },
   weatherInfo: {alignItems: 'center'},
-  weatherIcon: {width: '200', height: '200'},
+  weatherIcon: {width: '250', height: '250'},
+  weatherIconCloud: {width: '250', height: '200'},
   temperature: {fontSize: 120},
 
   cloudImage: {
@@ -46,6 +47,33 @@ const styles = StyleSheet.create({
     height: 70,
     top: '35%',
     left: '20%',
+  },
+  overlayContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.9)',
+  },
+  overlay: {
+    width: '90%',
+    height: '80%',
+    position: 'relative',
+    alignItems: 'center',
+  },
+  infoBlockLeft: {
+    position: 'absolute',
+    left: 20,
+    top: '40%',
+  },
+  infoBlockRight: {
+    position: 'absolute',
+    right: 20,
+    top: '2%',
+  },
+  infoBlockBottom: {
+    position: 'absolute',
+    right: 20,
+    bottom: 100,
   },
 });
 

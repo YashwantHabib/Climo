@@ -16,13 +16,13 @@ const forecastData = [
   },
   {
     day: 'WED',
-    icon: 'Moon',
+    icon: 'Thunder',
     temp: 28,
     condition: 'Mist',
   },
   {
     day: 'THU',
-    icon: 'Moon',
+    icon: 'SnowFlake',
     temp: 30,
     condition: 'Snow',
   },
@@ -38,6 +38,10 @@ const weatherIcons = {
   Sun: require('../assets/weatherIcons/Sun.png'),
   Moon: require('../assets/weatherIcons/Moon.png'),
   Cloud: require('../assets/weatherIcons/Cloud.png'),
+  Drizzle: require('../assets/weatherIcons/Drizzle.png'),
+  Rain: require('../assets/weatherIcons/CloudDark.png'),
+  Thunder: require('../assets/weatherIcons/Thunder.png'),
+  SnowFlake: require('../assets/weatherIcons/SnowFlake.png'),
 };
 
 const ForecastBar = ({onSelectWeather}) => {
