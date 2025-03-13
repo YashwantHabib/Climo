@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.9)',
   },
   overlay: {
     width: '90%',
@@ -60,20 +59,63 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignItems: 'center',
   },
+  textInfo: {
+    color: 'gray',
+  },
+  textInfoR: {
+    textAlign: 'right',
+  },
   infoBlockLeft: {
     position: 'absolute',
-    left: 20,
+    left: 10,
     top: '40%',
   },
   infoBlockRight: {
     position: 'absolute',
-    right: 20,
-    top: '2%',
+    right: 10,
+    textAlign: 'right',
   },
   infoBlockBottom: {
     position: 'absolute',
-    right: 20,
-    bottom: 100,
+    right: 10,
+    top: '60%',
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  modalContainer: {
+    backgroundColor: 'black',
+    padding: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    height: '90%',
+  },
+  modalTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: 10,
+  },
+  searchInput: {
+    backgroundColor: '#222',
+    color: 'white',
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 15,
+  },
+  currentLocation: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+  },
+  currentLocationText: {
+    color: 'white',
+    marginLeft: 10,
+  },
+  closeButton: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 

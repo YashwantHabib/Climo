@@ -35,32 +35,36 @@ const WeatherInfo = ({weather, fadeAnim}) => {
             style={styles.overlay}
             onPress={() => setModalVisible(false)}>
             <View style={styles.infoBlockLeft}>
-              <View style={styles.lineLeft}></View>
-              <View style={styles.line}></View>
-              <Text style={styles.text}>TEMP: {weather.temp}°</Text>
-              <Text style={styles.text}>FEELS: {weather.feelsLike}°</Text>
-              <Text style={styles.text}>HUMID: {weather.humidity}%</Text>
-              <Text style={styles.text}>MAX: {weather.maxTemp}°</Text>
-              <Text style={styles.text}>MIN: {weather.minTemp}°</Text>
+              <Text style={styles.textInfo}>TEMP: 25°</Text>
+              <Text style={styles.textInfo}>FEELS: 25°</Text>
+              <Text style={styles.textInfo}>HUMID: 80%</Text>
+              <Text style={styles.textInfo}>MAX: 28°</Text>
+              <Text style={styles.textInfo}>MIN: 22°</Text>
             </View>
 
             {/* Right Info Block */}
             <View style={styles.infoBlockRight}>
-              <View style={styles.line}></View>
-              <Text style={styles.text}>SUNRISE: {weather.sunrise}</Text>
-              <Text style={styles.text}>SUNSET: {weather.sunset}</Text>
-              <Text style={styles.text}>
-                VISIBILITY: {weather.visibility}km
+              <Text style={[styles.textInfo, styles.textInfoR]}>
+                VISIBILITY: 10km
+              </Text>
+              <Text style={[styles.textInfo, styles.textInfoR]}>
+                SUNRISE: 7:00
+              </Text>
+              <Text style={[styles.textInfo, styles.textInfoR]}>
+                SUNSET: 6:00
               </Text>
             </View>
 
             {/* Bottom Info Block */}
             <View style={styles.infoBlockBottom}>
-              <View style={styles.line}></View>
-              <Text style={styles.text}>WIND</Text>
-              <Text style={styles.text}>DEG: {weather.windDeg}°</Text>
-              <Text style={styles.text}>GUST: {weather.windGust} m/s</Text>
-              <Text style={styles.text}>SPEED: {weather.windSpeed} m/s</Text>
+              <Text style={[styles.textInfo, styles.textInfoR]}>WIND</Text>
+              <Text style={[styles.textInfo, styles.textInfoR]}>DEG: 45°</Text>
+              <Text style={[styles.textInfo, styles.textInfoR]}>
+                GUST: 10 m/s
+              </Text>
+              <Text style={[styles.textInfo, styles.textInfoR]}>
+                SPEED: 15 m/s
+              </Text>
             </View>
           </TouchableOpacity>
         </View>
