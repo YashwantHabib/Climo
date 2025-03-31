@@ -1,7 +1,7 @@
 import {Animated} from 'react-native';
 
 export const startCloudAnimation = (condition, cloudAnim, duration = 8000) => {
-  if (condition === 'Clouds') {
+  if (condition.toLowerCase().includes('cloud')) {
     cloudAnim.setValue(0);
     Animated.loop(
       Animated.sequence([
@@ -21,7 +21,7 @@ export const startCloudAnimation = (condition, cloudAnim, duration = 8000) => {
 };
 
 export const startSunAnimation = (condition, sunParticles) => {
-  if (condition === 'Clear') {
+  if (condition.toLowerCase().includes('clear')) {
     sunParticles.setValue(0);
     Animated.loop(
       Animated.timing(sunParticles, {

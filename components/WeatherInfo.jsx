@@ -10,13 +10,22 @@ import {
 import styles from '../styles/weatherStyles';
 
 const weatherIcons = {
-  Sun: require('../assets/weatherIcons/Sun.png'),
-  Moon: require('../assets/weatherIcons/Moon.png'),
-  Cloud: require('../assets/weatherIcons/Cloud.png'),
-  Drizzle: require('../assets/weatherIcons/Drizzle.png'),
-  Rain: require('../assets/weatherIcons/CloudDark.png'),
-  Thunder: require('../assets/weatherIcons/Thunder.png'),
-  SnowFlake: require('../assets/weatherIcons/SnowFlake.png'),
+  '01d': require('../assets/weatherIcons/Sun.png'),
+  '01n': require('../assets/weatherIcons/Moon.png'),
+  '02d': require('../assets/weatherIcons/Sun.png'),
+  '02n': require('../assets/weatherIcons/Moon.png'),
+  '03d': require('../assets/weatherIcons/Cloud.png'),
+  '03n': require('../assets/weatherIcons/Cloud.png'),
+  '04d': require('../assets/weatherIcons/CloudDark.png'),
+  '04n': require('../assets/weatherIcons/CloudDark.png'),
+  '09d': require('../assets/weatherIcons/Drizzle.png'),
+  '09n': require('../assets/weatherIcons/Drizzle.png'),
+  '10d': require('../assets/weatherIcons/CloudDark.png'),
+  '10n': require('../assets/weatherIcons/CloudDark.png'),
+  '11d': require('../assets/weatherIcons/Thunder.png'),
+  '11n': require('../assets/weatherIcons/Thunder.png'),
+  '13d': require('../assets/weatherIcons/SnowFlake.png'),
+  '13n': require('../assets/weatherIcons/SnowFlake.png'),
 };
 
 const WeatherInfo = ({weather, fadeAnim}) => {
@@ -35,35 +44,34 @@ const WeatherInfo = ({weather, fadeAnim}) => {
             style={styles.overlay}
             onPress={() => setModalVisible(false)}>
             <View style={styles.infoBlockLeft}>
-              <Text style={styles.textInfo}>TEMP: 25°</Text>
-              <Text style={styles.textInfo}>FEELS: 25°</Text>
-              <Text style={styles.textInfo}>HUMID: 80%</Text>
-              <Text style={styles.textInfo}>MAX: 28°</Text>
-              <Text style={styles.textInfo}>MIN: 22°</Text>
+              <Text style={styles.textInfo}>TEMP: {weather.temp}°</Text>
+              <Text style={styles.textInfo}>FEELS: {weather.feels_like}°</Text>
+              <Text style={styles.textInfo}>HUMID: {weather.humidity}%</Text>
+              <Text style={styles.textInfo}>MAX: {weather.temp_min}°</Text>
+              <Text style={styles.textInfo}>MIN: {weather.temp_max}°</Text>
             </View>
 
             {/* Right Info Block */}
             <View style={styles.infoBlockRight}>
               <Text style={[styles.textInfo, styles.textInfoR]}>
-                VISIBILITY: 10km
+                VISIBILITY: {weather.visibility}km
               </Text>
               <Text style={[styles.textInfo, styles.textInfoR]}>
-                SUNRISE: 7:00
+                SUNRISE:{weather.sunrise}
               </Text>
               <Text style={[styles.textInfo, styles.textInfoR]}>
-                SUNSET: 6:00
+                SUNSET:{weather.sunset}
               </Text>
             </View>
 
             {/* Bottom Info Block */}
             <View style={styles.infoBlockBottom}>
               <Text style={[styles.textInfo, styles.textInfoR]}>WIND</Text>
-              <Text style={[styles.textInfo, styles.textInfoR]}>DEG: 45°</Text>
               <Text style={[styles.textInfo, styles.textInfoR]}>
-                GUST: 10 m/s
+                DEG: {weather.wind.deg}°
               </Text>
               <Text style={[styles.textInfo, styles.textInfoR]}>
-                SPEED: 15 m/s
+                SPEED: {weather.wind.speed}m/s
               </Text>
             </View>
           </TouchableOpacity>
