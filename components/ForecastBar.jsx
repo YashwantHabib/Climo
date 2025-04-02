@@ -1,62 +1,47 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
+import weatherIcons from '../utils/weatherIcons'; // Import the icons from your central file
 
-const forecastData = [
-  {
-    day: 'MON',
-    icon: 'Sun',
-    temp: 25,
-    condition: 'Clouds',
-  },
-  {
-    day: 'TUE',
-    icon: 'Sun',
-    temp: 27,
-    condition: 'Rain',
-  },
-  {
-    day: 'WED',
-    icon: 'Thunder',
-    temp: 28,
-    condition: 'Mist',
-  },
-  {
-    day: 'THU',
-    icon: 'SnowFlake',
-    temp: 30,
-    condition: 'Snow',
-  },
-  {
-    day: 'FRI',
-    icon: 'Cloud',
-    temp: 29,
-    condition: 'Clear',
-  },
-];
-
-const weatherIcons = {
-  Sun: require('../assets/weatherIcons/Sun.png'),
-  Moon: require('../assets/weatherIcons/Moon.png'),
-  Cloud: require('../assets/weatherIcons/Cloud.png'),
-  Drizzle: require('../assets/weatherIcons/Drizzle.png'),
-  Rain: require('../assets/weatherIcons/CloudDark.png'),
-  Thunder: require('../assets/weatherIcons/Thunder.png'),
-  SnowFlake: require('../assets/weatherIcons/SnowFlake.png'),
-};
-
-const ForecastBar = ({onSelectWeather}) => {
+const ForecastBar = ({forecast, updateWeather}) => {
   return (
     <View style={styles.container}>
-      {forecastData.map((item, index) => (
-        <Pressable
-          key={index}
-          style={styles.card}
-          onPress={() => onSelectWeather(item)}>
-          <Text style={[styles.text, styles.day]}>{item.day}</Text>
-          <Image source={weatherIcons[item.icon]} style={styles.icon} />
-          <Text style={[styles.text, styles.temp]}>{item.temp}</Text>
-        </Pressable>
-      ))}
+      {forecast.length > 0 ? (
+        forecast.map((item, index) => (
+          <Pressable
+            key={index}
+            style={styles.card}
+            onPress={() =>
+              updateWeather({
+                icon: item.data.weather[0].icon,
+                temp: Math.round(item.data.main.temp),
+                condition: item.data.weather[0].description,
+                temp_min: Math.round(item.data.main.temp_min),
+                temp_max: Math.round(item.data.main.temp_max),
+                feels_like: Math.round(item.data.main.feels_like),
+                humidity: item.data.main.humidity,
+                visibility: item.data.visibility / 1000,
+                wind: {
+                  speed: item.data.wind.speed,
+                  deg: item.data.wind.deg,
+                },
+                sunrise: item.data.sys.sunrise,
+                sunset: item.data.sys.sunset,
+                timezone: item.data.timezone,
+              })
+            }>
+            <Text style={[styles.text, styles.day]}>{item.day}</Text>
+            <Image
+              source={weatherIcons[item.data.weather[0].icon]}
+              style={styles.icon}
+            />
+            <Text style={[styles.text, styles.temp]}>
+              {Math.round(item.data.main.temp)}
+            </Text>
+          </Pressable>
+        ))
+      ) : (
+        <Text style={styles.text}>Loading forecast...</Text>
+      )}
     </View>
   );
 };

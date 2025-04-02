@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef} from 'react';
 import {PermissionsAndroid, Platform} from 'react-native';
-import {fetchWeatherData} from '../components/Api';
+import {fetchWeatherData, fetchWeatherForecast} from '../components/Api';
 import {Animated} from 'react-native';
 import {
   startCloudAnimation,
@@ -16,6 +16,7 @@ const useWeather = () => {
     condition: 'Clear',
   });
   const [location, setLocation] = useState('Fetching location...');
+  const [forecast, setForecast] = useState([]);
 
   // Animations
   const fadeAnim = useRef(new Animated.Value(1)).current;
@@ -33,13 +34,14 @@ const useWeather = () => {
         feels_like: Math.round(currentData.main.feels_like),
         humidity: currentData.main.humidity,
         visibility: currentData.visibility / 1000, // Convert to km
-        sunrise: new Date(currentData.sys.sunrise * 1000).toLocaleTimeString(),
-        sunset: new Date(currentData.sys.sunset * 1000).toLocaleTimeString(),
+        sunrise: currentData.sys.sunrise,
+        sunset: currentData.sys.sunset,
         wind: {
           speed: currentData.wind.speed,
           deg: currentData.wind.deg,
         },
         condition: currentData.weather[0].description,
+        timezone: currentData.timezone,
       });
     }
   }, [currentData]);
@@ -92,6 +94,12 @@ const useWeather = () => {
             setCurrentData(weatherData);
             console.log(currentData);
           }
+          const ForecastData = await fetchWeatherForecast(lat, lon);
+          if (ForecastData) {
+            setForecast(ForecastData);
+            console.log('Forecast Data');
+            console.log(forecast);
+          }
         },
         async () => {
           const weatherData = await fetchWeatherData(lat, lon);
@@ -99,6 +107,12 @@ const useWeather = () => {
             setLocation(weatherData.name);
             setCurrentData(weatherData);
             console.log(currentData);
+          }
+          const ForecastData = await fetchWeatherForecast(lat, lon);
+          if (ForecastData) {
+            setForecast(ForecastData);
+            console.log('Forecast Data');
+            console.log(forecast);
           }
         },
         {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
@@ -111,6 +125,12 @@ const useWeather = () => {
         setCurrentData(weatherData);
         console.log(currentData);
       }
+      const ForecastData = await fetchWeatherForecast(lat, lon);
+      if (ForecastData) {
+        setForecast(ForecastData);
+        console.log('Forecast Data');
+        console.log(forecast);
+      }
     }
   };
 
@@ -120,6 +140,7 @@ const useWeather = () => {
 
   return {
     weather,
+    forecast,
     location,
     fadeAnim,
     cloudAnim,

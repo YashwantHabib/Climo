@@ -9,27 +9,19 @@ import {
 } from 'react-native';
 import styles from '../styles/weatherStyles';
 
-const weatherIcons = {
-  '01d': require('../assets/weatherIcons/Sun.png'),
-  '01n': require('../assets/weatherIcons/Moon.png'),
-  '02d': require('../assets/weatherIcons/Sun.png'),
-  '02n': require('../assets/weatherIcons/Moon.png'),
-  '03d': require('../assets/weatherIcons/Cloud.png'),
-  '03n': require('../assets/weatherIcons/Cloud.png'),
-  '04d': require('../assets/weatherIcons/CloudDark.png'),
-  '04n': require('../assets/weatherIcons/CloudDark.png'),
-  '09d': require('../assets/weatherIcons/Drizzle.png'),
-  '09n': require('../assets/weatherIcons/Drizzle.png'),
-  '10d': require('../assets/weatherIcons/CloudDark.png'),
-  '10n': require('../assets/weatherIcons/CloudDark.png'),
-  '11d': require('../assets/weatherIcons/Thunder.png'),
-  '11n': require('../assets/weatherIcons/Thunder.png'),
-  '13d': require('../assets/weatherIcons/SnowFlake.png'),
-  '13n': require('../assets/weatherIcons/SnowFlake.png'),
-};
+import weatherIcons from '../utils/weatherIcons';
 
 const WeatherInfo = ({weather, fadeAnim}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const formatTime = (timestamp, timezoneOffset) => {
+    const date = new Date((timestamp + timezoneOffset) * 1000); // Adjust for timezone
+    let hours = date.getUTCHours(); // Get UTC hours and adjust
+    let minutes = date.getUTCMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12; // Convert to 12-hour format
+    minutes = minutes < 10 ? `0${minutes}` : minutes; // Add leading zero if needed
+    return `${hours}:${minutes} ${ampm}`;
+  };
 
   return (
     <Animated.View style={[styles.weatherInfo, {opacity: fadeAnim}]}>
@@ -57,10 +49,10 @@ const WeatherInfo = ({weather, fadeAnim}) => {
                 VISIBILITY: {weather.visibility}km
               </Text>
               <Text style={[styles.textInfo, styles.textInfoR]}>
-                SUNRISE:{weather.sunrise}
+                SUNRISE: {formatTime(weather.sunrise, weather.timezone)}
               </Text>
               <Text style={[styles.textInfo, styles.textInfoR]}>
-                SUNSET:{weather.sunset}
+                SUNSET: {formatTime(weather.sunset, weather.timezone)}
               </Text>
             </View>
 

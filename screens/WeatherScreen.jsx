@@ -17,6 +17,7 @@ import styles from '../styles/weatherStyles';
 const WeatherScreen = ({navigation}) => {
   const {
     weather,
+    forecast,
     location,
     fadeAnim,
     cloudAnim,
@@ -72,7 +73,7 @@ const WeatherScreen = ({navigation}) => {
         </Pressable>
 
         <WeatherSlider />
-        <ForecastBar onSelectWeather={updateWeather} />
+        <ForecastBar forecast={forecast} updateWeather={updateWeather} />
       </View>
 
       {/* Location Modal */}
