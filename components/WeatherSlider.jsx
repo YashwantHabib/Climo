@@ -14,7 +14,8 @@ const THUMB_SIZE = 40;
 const STEPS = ['6 A', '9', '12 P', '3', '6', '9'];
 const STEP_WIDTH = (SLIDER_WIDTH - THUMB_SIZE) / (STEPS.length - 1);
 
-const WeatherSlider = () => {
+const WeatherSlider = ({forecast, updateWeather}) => {
+  console.log('forecast', forecast);
   const position = useRef(new Animated.Value(0)).current;
   const currentIndex = useRef(0);
 

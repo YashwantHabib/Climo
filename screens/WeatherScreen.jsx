@@ -72,7 +72,7 @@ const WeatherScreen = ({navigation}) => {
           <RefreshCwIcon color="white" size={24} />
         </Pressable>
 
-        <WeatherSlider />
+        <WeatherSlider forecast={forecast} updateWeather={updateWeather} />
         <ForecastBar forecast={forecast} updateWeather={updateWeather} />
       </View>
 
