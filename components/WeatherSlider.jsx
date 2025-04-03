@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,15 +11,32 @@ import {
 // Constants
 const SLIDER_WIDTH = Dimensions.get('window').width * 0.7;
 const THUMB_SIZE = 40;
-const STEPS = ['6 A', '9', '12 P', '3', '6', '9'];
-const STEP_WIDTH = (SLIDER_WIDTH - THUMB_SIZE) / (STEPS.length - 1);
 
 const WeatherSlider = ({forecast, updateWeather}) => {
-  console.log('forecast', forecast);
+  if (!forecast || !forecast.list || !forecast.city) {
+    return null; // Handle cases where forecast data isn't available yet
+  }
+
+  const {timezone} = forecast.city;
+  const firstSixForecasts = forecast.list.slice(0, 6);
+
+  // Generate time labels for steps
+  const STEPS = firstSixForecasts.map(entry => {
+    const date = new Date((entry.dt + timezone) * 1000);
+    let hours = date.getUTCHours();
+
+    // Convert to 12-hour format
+    const period = hours >= 12 ? 'P' : 'A';
+    hours = hours % 12 || 12; // Convert 0 to 12 for 12-hour format
+
+    return `${hours}${period}`;
+  });
+
+  const STEP_WIDTH = (SLIDER_WIDTH - THUMB_SIZE) / (STEPS.length - 1);
+
   const position = useRef(new Animated.Value(0)).current;
   const currentIndex = useRef(0);
 
-  // Handles slider movement
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponder: () => true,
@@ -37,6 +54,32 @@ const WeatherSlider = ({forecast, updateWeather}) => {
         duration: 200,
         useNativeDriver: false,
       }).start();
+      console.log(firstSixForecasts[currentIndex.current]);
+      updateWeather({
+        icon: firstSixForecasts[currentIndex.current].weather[0].icon,
+        temp: Math.round(firstSixForecasts[currentIndex.current].main.temp),
+        condition:
+          firstSixForecasts[currentIndex.current].weather[0].description,
+        temp_min: Math.round(
+          firstSixForecasts[currentIndex.current].main.temp_min,
+        ),
+        temp_max: Math.round(
+          firstSixForecasts[currentIndex.current].main.temp_max,
+        ),
+        feels_like: Math.round(
+          firstSixForecasts[currentIndex.current].main.feels_like,
+        ),
+        humidity: firstSixForecasts[currentIndex.current].main.humidity,
+        visibility: firstSixForecasts[currentIndex.current].visibility / 1000,
+        wind: {
+          speed: firstSixForecasts[currentIndex.current].wind.speed,
+          deg: firstSixForecasts[currentIndex.current].wind.deg,
+        },
+        sunrise: forecast.city.sunrise,
+        sunset: forecast.city.sunset,
+        timezone: forecast.city.timezone,
+      });
+      //Update weather based on slider value
     },
   });
 
@@ -98,11 +141,11 @@ const styles = StyleSheet.create({
     width: THUMB_SIZE,
     height: THUMB_SIZE,
     borderRadius: THUMB_SIZE / 2,
-    shadowColor: '#000', // Black shadow
-    shadowOffset: {width: 0, height: 4}, // Offset shadow
-    shadowOpacity: 0.3, // Shadow visibility
-    shadowRadius: 4, // Blurriness of shadow
-    elevation: 5, // Required for Android
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   labels: {
     flexDirection: 'row',

@@ -7,6 +7,7 @@ import {
   startSunAnimation,
   fadeInOutAnimation,
 } from '../utils/weatherAnimations';
+import Geolocation from '@react-native-community/geolocation'; // Import Geolocation
 
 const useWeather = () => {
   const [currentData, setCurrentData] = useState(null);
@@ -16,7 +17,9 @@ const useWeather = () => {
     condition: 'Clear',
   });
   const [location, setLocation] = useState('Fetching location...');
-  const [forecast, setForecast] = useState([]);
+  const [forecast, setForecast] = useState({});
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
+  const [error, setError] = useState(null); //add error state
 
   // Animations
   const fadeAnim = useRef(new Animated.Value(1)).current;
@@ -46,10 +49,9 @@ const useWeather = () => {
     }
   }, [currentData]);
 
-  // **Restart Cloud Animation when Weather Updates**
   useEffect(() => {
     if (weather.condition.toLowerCase().includes('cloud')) {
-      cloudAnim.setValue(0); // Reset animation
+      cloudAnim.setValue(0);
       cloudAnim2.setValue(0);
       startCloudAnimation(weather.condition, cloudAnim);
       startCloudAnimation(weather.condition, cloudAnim2, 10000);
@@ -79,57 +81,70 @@ const useWeather = () => {
   };
 
   const getCurrentLocation = async () => {
+    setIsLoading(true);
+    setError(null);
+    console.log('Requesting permission');
     const hasPermission = await requestLocationPermission();
     let lat = 34.6937;
     let lon = 135.5023;
+    console.log('Permission granted:', hasPermission);
 
     if (hasPermission) {
-      navigator.geolocation.getCurrentPosition(
+      Geolocation.getCurrentPosition(
         async position => {
+          console.log('Position fetched successfully:', position);
           lat = position.coords.latitude;
           lon = position.coords.longitude;
-          const weatherData = await fetchWeatherData(lat, lon);
-          if (weatherData) {
-            setLocation(weatherData.name);
-            setCurrentData(weatherData);
-            console.log(currentData);
-          }
-          const ForecastData = await fetchWeatherForecast(lat, lon);
-          if (ForecastData) {
-            setForecast(ForecastData);
-            console.log('Forecast Data');
-            console.log(forecast);
-          }
-        },
-        async () => {
-          const weatherData = await fetchWeatherData(lat, lon);
-          if (weatherData) {
-            setLocation(weatherData.name);
-            setCurrentData(weatherData);
-            console.log(currentData);
-          }
-          const ForecastData = await fetchWeatherForecast(lat, lon);
-          if (ForecastData) {
-            setForecast(ForecastData);
-            console.log('Forecast Data');
-            console.log(forecast);
+          console.log(`Latitude: ${lat}, Longitude: ${lon}`);
+
+          try {
+            const weatherData = await fetchWeatherData(lat, lon);
+            if (weatherData) {
+              setLocation(weatherData.name);
+              setCurrentData(weatherData);
+              console.log('Weather Data:', weatherData);
+            }
+
+            const ForecastData = await fetchWeatherForecast(lat, lon);
+            if (ForecastData) {
+              setForecast(ForecastData);
+              console.log('Forecast Data:', ForecastData);
+            }
+          } catch (apiError) {
+            console.error('API Error:', apiError);
+            setError('Failed to fetch weather data.');
+          } finally {
+            setIsLoading(false);
           }
         },
-        {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+        error => {
+          console.error('Error getting location:', error);
+          console.log('Geolocation error object:', error);
+          setError('Failed to get location.');
+          setIsLoading(false);
+        },
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
       );
     } else {
       console.log('Using default coordinates.');
-      const weatherData = await fetchWeatherData(lat, lon);
-      if (weatherData) {
-        setLocation(weatherData.name);
-        setCurrentData(weatherData);
-        console.log(currentData);
-      }
-      const ForecastData = await fetchWeatherForecast(lat, lon);
-      if (ForecastData) {
-        setForecast(ForecastData);
-        console.log('Forecast Data');
-        console.log(forecast);
+      try {
+        const weatherData = await fetchWeatherData(lat, lon);
+        if (weatherData) {
+          setLocation(weatherData.name);
+          setCurrentData(weatherData);
+          console.log('Weather Data (default location):', weatherData);
+        }
+
+        const ForecastData = await fetchWeatherForecast(lat, lon);
+        if (ForecastData) {
+          setForecast(ForecastData);
+          console.log('Forecast Data (default location):', ForecastData);
+        }
+      } catch (apiError) {
+        console.error('API Error:', apiError);
+        setError('Failed to fetch weather data.');
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -148,6 +163,8 @@ const useWeather = () => {
     sunParticles,
     getCurrentLocation,
     updateWeather,
+    isLoading,
+    error,
   };
 };
 

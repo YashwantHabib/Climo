@@ -3,10 +3,38 @@ import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
 import weatherIcons from '../utils/weatherIcons'; // Import the icons from your central file
 
 const ForecastBar = ({forecast, updateWeather}) => {
+  if (!forecast || !forecast.list || !forecast.city) {
+    return <Text style={styles.text}>Loading forecast...</Text>;
+  }
+
+  const timezoneOffset = forecast.city.timezone; // Timezone offset in seconds
+
+  const filteredForecast = forecast.list
+    .map(item => {
+      const utcTime = new Date(item.dt * 1000);
+      const localTime = new Date(utcTime.getTime() + timezoneOffset * 1000); // Convert to local time
+
+      return {
+        day: localTime
+          .toLocaleDateString('en-US', {weekday: 'short'})
+          .toUpperCase(),
+        localHour: localTime.getHours(),
+        data: item,
+      };
+    })
+    .filter(item => item.localHour >= 9 && item.localHour <= 12) // Keep only 9 AM - 12 PM entries
+    .reduce((acc, curr) => {
+      if (!acc.some(entry => entry.day === curr.day)) {
+        acc.push(curr); // Pick only one entry per day
+      }
+      return acc;
+    }, [])
+    .slice(0, 5); // Get next 5 days
+
   return (
     <View style={styles.container}>
-      {forecast.length > 0 ? (
-        forecast.map((item, index) => (
+      {filteredForecast.length > 0 ? (
+        filteredForecast.map((item, index) => (
           <Pressable
             key={index}
             style={styles.card}
@@ -40,7 +68,7 @@ const ForecastBar = ({forecast, updateWeather}) => {
           </Pressable>
         ))
       ) : (
-        <Text style={styles.text}>Loading forecast...</Text>
+        <Text style={styles.text}>No forecast available</Text>
       )}
     </View>
   );

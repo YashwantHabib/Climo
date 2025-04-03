@@ -40,33 +40,28 @@ export async function fetchWeatherForecast(lat, lon) {
     {
       console.log('Unfiltered:', data);
     }
-    const timezoneOffset = data.city.timezone; // Timezone offset in seconds
 
-    const filteredForecast = data.list
-      .map(item => {
-        const utcTime = new Date(item.dt * 1000);
-        const localTime = new Date(utcTime.getTime() + timezoneOffset * 1000); // Convert to local time
+    return data;
+  } catch (error) {
+    console.error('Fetch Error:', error);
+    return null;
+  }
+}
 
-        const localHours = localTime.getHours();
+export async function fetchWeatherByCity(city) {
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`,
+    );
 
-        return {
-          day: localTime
-            .toLocaleDateString('en-US', {weekday: 'short'})
-            .toUpperCase(),
-          hour: localHours, // Store hour for filtering
-          data: item,
-        };
-      })
-      .filter(item => item.hour >= 9 && item.hour <= 12) // Keep only 9AM-12PM entries
-      .reduce((acc, curr) => {
-        if (!acc.some(entry => entry.day === curr.day)) {
-          acc.push(curr); // Pick only one entry per day
-        }
-        return acc;
-      }, [])
-      .slice(0, 5); // Get next 5 days
+    if (!response.ok) {
+      const errorData = await response.json();
+      alert(`${errorData.cod} ${errorData.message}`);
+      console.error('API Error:', errorData);
+      return null;
+    }
 
-    return filteredForecast;
+    return await response.json();
   } catch (error) {
     console.error('Fetch Error:', error);
     return null;
