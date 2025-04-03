@@ -1,6 +1,10 @@
 import {useState, useEffect, useRef} from 'react';
 import {PermissionsAndroid, Platform} from 'react-native';
-import {fetchWeatherData, fetchWeatherForecast} from '../components/Api';
+import {
+  fetchWeatherData,
+  fetchWeatherForecast,
+  fetchWeatherByCity,
+} from '../components/Api';
 import {Animated} from 'react-native';
 import {
   startCloudAnimation,
