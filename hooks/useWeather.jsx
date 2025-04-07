@@ -69,6 +69,42 @@ const useWeather = () => {
   const updateWeather = newWeather =>
     fadeInOutAnimation(fadeAnim, () => setWeather(newWeather));
 
+  // Inside useWeather
+  const [city, setCity] = useState('');
+
+  useEffect(() => {
+    const fetchCityWeather = async () => {
+      if (!city) return;
+
+      setIsLoading(true);
+      setError(null);
+      try {
+        const weatherData = await fetchWeatherByCity(city);
+        if (weatherData) {
+          setLocation(weatherData.name);
+          setCurrentData(weatherData);
+          console.log('Weather Data (city):', weatherData);
+        }
+
+        const forecastData = await fetchWeatherForecast(
+          weatherData.coord.lat,
+          weatherData.coord.lon,
+        );
+        if (forecastData) {
+          setForecast(forecastData);
+          console.log('Forecast Data (city):', forecastData);
+        }
+      } catch (err) {
+        console.error('City weather fetch error:', err);
+        setError('Failed to fetch weather for the city.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCityWeather();
+  }, [city]);
+
   const requestLocationPermission = async () => {
     if (Platform.OS === 'android') {
       try {
@@ -169,6 +205,7 @@ const useWeather = () => {
     updateWeather,
     isLoading,
     error,
+    setCity,
   };
 };
 

@@ -12,7 +12,7 @@ const ForecastBar = ({forecast, updateWeather}) => {
   const filteredForecast = forecast.list
     .map(item => {
       const utcTime = new Date(item.dt * 1000);
-      const localTime = new Date(utcTime.getTime() + timezoneOffset * 1000); // Convert to local time
+      const localTime = new Date(utcTime.getTime() + timezoneOffset * 1000);
 
       return {
         day: localTime
@@ -22,14 +22,14 @@ const ForecastBar = ({forecast, updateWeather}) => {
         data: item,
       };
     })
-    .filter(item => item.localHour >= 9 && item.localHour <= 12) // Keep only 9 AM - 12 PM entries
+    .filter(item => item.localHour >= 6 && item.localHour <= 9) // More forgiving morning range
     .reduce((acc, curr) => {
       if (!acc.some(entry => entry.day === curr.day)) {
-        acc.push(curr); // Pick only one entry per day
+        acc.push(curr); // One entry per day
       }
       return acc;
     }, [])
-    .slice(0, 5); // Get next 5 days
+    .slice(0, 5);
 
   return (
     <View style={styles.container}>

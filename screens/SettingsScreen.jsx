@@ -6,8 +6,6 @@ import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 const SettingsScreen = ({navigation}) => {
   const [temperature, setTemperature] = useState('C');
   const [windSpeed, setWindSpeed] = useState('M/S');
-  const [theme, setTheme] = useState('#E59866');
-  const [iconPack, setIconPack] = useState('Monochrome');
 
   return (
     <SafeAreaProvider>
@@ -25,10 +23,6 @@ const SettingsScreen = ({navigation}) => {
             </Pressable>
           </View>
           <View style={styles.settingList}>
-            <SettingItem
-              title="Current Location"
-              icon={<MapPin color="white" size={20} />}
-            />
             <SettingToggle
               title="Temperature"
               icon={<Thermometer color="white" size={20} />}
@@ -43,32 +37,6 @@ const SettingsScreen = ({navigation}) => {
               value={windSpeed}
               setValue={setWindSpeed}
             />
-            <SettingItem
-              title="Widgets"
-              icon={<Grid color="white" size={20} />}
-            />
-            <Text style={styles.sectionTitle}>Theme</Text>
-            <View style={styles.themeOptions}>
-              {['#E59866', '#FFFFFF', '#58D3F7'].map(color => (
-                <ThemeCircle
-                  key={color}
-                  color={color}
-                  selected={theme === color}
-                  onPress={() => setTheme(color)}
-                />
-              ))}
-            </View>
-            <Text style={styles.sectionTitle}>Icon Pack</Text>
-            <View style={styles.iconPack}>
-              {['Monochrome', 'Sketch'].map(pack => (
-                <IconPackOption
-                  key={pack}
-                  title={pack}
-                  selected={iconPack === pack}
-                  onPress={() => setIconPack(pack)}
-                />
-              ))}
-            </View>
           </View>
         </View>
       </SafeAreaView>
@@ -112,24 +80,6 @@ const SettingToggle = ({title, icon, options, value, setValue}) => (
       ))}
     </View>
   </View>
-);
-
-const ThemeCircle = ({color, selected, onPress}) => (
-  <Pressable
-    style={[
-      styles.themeCircle,
-      {backgroundColor: color},
-      selected && styles.themeSelected,
-    ]}
-    onPress={onPress}
-  />
-);
-
-const IconPackOption = ({title, selected, onPress}) => (
-  <Pressable style={styles.iconOption} onPress={onPress}>
-    <View style={[styles.iconPlaceholder, selected && styles.iconSelected]} />
-    <Text style={styles.iconText}>{title}</Text>
-  </Pressable>
 );
 
 const styles = StyleSheet.create({
@@ -227,44 +177,6 @@ const styles = StyleSheet.create({
 
   toggleTextActive: {
     color: 'white',
-  },
-
-  themeOptions: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginTop: 10,
-  },
-  themeCircle: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: 'black',
-  },
-  themeSelected: {
-    borderColor: 'white',
-  },
-  iconPack: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginTop: 10,
-  },
-  iconOption: {
-    alignItems: 'center',
-  },
-  iconPlaceholder: {
-    width: 50,
-    height: 50,
-    backgroundColor: '#444',
-    borderRadius: 10,
-  },
-  iconSelected: {
-    borderColor: 'white',
-    borderWidth: 2,
-  },
-  iconText: {
-    color: 'white',
-    marginTop: 5,
   },
 });
 

@@ -24,7 +24,9 @@ const WeatherScreen = ({navigation}) => {
     cloudAnim2,
     getCurrentLocation,
     updateWeather,
+    setCity, // 👈 Destructure it
   } = useWeather();
+
   const [modalVisible, setModalVisible] = useState(false);
   const [searchText, setSearchText] = useState('');
 
@@ -83,6 +85,7 @@ const WeatherScreen = ({navigation}) => {
         searchText={searchText}
         setSearchText={setSearchText}
         getCurrentLocation={getCurrentLocation}
+        setCity={setCity}
       />
     </SafeAreaView>
   );
