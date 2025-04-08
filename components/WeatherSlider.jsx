@@ -54,7 +54,6 @@ const WeatherSlider = ({forecast, updateWeather}) => {
         duration: 200,
         useNativeDriver: false,
       }).start();
-      console.log(firstSixForecasts[currentIndex.current]);
       updateWeather({
         icon: firstSixForecasts[currentIndex.current].weather[0].icon,
         temp: Math.round(firstSixForecasts[currentIndex.current].main.temp),

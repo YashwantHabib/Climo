@@ -59,9 +59,11 @@ const WeatherInfo = ({weather, fadeAnim}) => {
             {/* Bottom Info Block */}
             <View style={styles.infoBlockBottom}>
               <Text style={[styles.textInfo, styles.textInfoR]}>WIND</Text>
-              <Text style={[styles.textInfo, styles.textInfoR]}>DEG: 5°</Text>
               <Text style={[styles.textInfo, styles.textInfoR]}>
-                SPEED: 10m/s
+                DEG: {weather.wind.deg}°
+              </Text>
+              <Text style={[styles.textInfo, styles.textInfoR]}>
+                SPEED: {weather.wind.speed}m/s
               </Text>
             </View>
           </TouchableOpacity>

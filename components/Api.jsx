@@ -10,14 +10,12 @@ export async function fetchWeatherData(lat, lon) {
     if (!response.ok) {
       const errorData = await response.json();
       alert(`${errorData.cod} ${errorData.message}`);
-      console.error('API Error:', errorData);
       return null;
     }
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Fetch Error:', error);
     return null;
   }
 }
@@ -32,18 +30,13 @@ export async function fetchWeatherForecast(lat, lon) {
     if (!response.ok) {
       const errorData = await response.json();
       alert(`${errorData.cod} ${errorData.message}`);
-      console.error('API Error:', errorData);
       return null;
     }
 
     const data = await response.json();
-    {
-      console.log('Unfiltered:', data);
-    }
 
     return data;
   } catch (error) {
-    console.error('Fetch Error:', error);
     return null;
   }
 }
@@ -57,13 +50,11 @@ export async function fetchWeatherByCity(city) {
     if (!response.ok) {
       const errorData = await response.json();
       alert(`${errorData.cod} ${errorData.message}`);
-      console.error('API Error:', errorData);
       return null;
     }
 
     return await response.json();
   } catch (error) {
-    console.error('Fetch Error:', error);
     return null;
   }
 }

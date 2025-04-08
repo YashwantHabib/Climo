@@ -12,6 +12,7 @@ import MistEffect from '../components/MistEffect';
 import TornadoEffect from '../components/TornadoEffect';
 import useWeather from '../hooks/useWeather';
 import LocationModal from '../hooks/LocationModal';
+import LoadingModal from '../components/LoadingModal';
 import styles from '../styles/weatherStyles';
 
 const WeatherScreen = ({navigation}) => {
@@ -24,7 +25,9 @@ const WeatherScreen = ({navigation}) => {
     cloudAnim2,
     getCurrentLocation,
     updateWeather,
-    setCity, // 👈 Destructure it
+    setCity,
+
+    isLoading,
   } = useWeather();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -87,6 +90,7 @@ const WeatherScreen = ({navigation}) => {
         getCurrentLocation={getCurrentLocation}
         setCity={setCity}
       />
+      <LoadingModal visible={isLoading} />
     </SafeAreaView>
   );
 };

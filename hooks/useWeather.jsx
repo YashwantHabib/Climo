@@ -83,7 +83,6 @@ const useWeather = () => {
         if (weatherData) {
           setLocation(weatherData.name);
           setCurrentData(weatherData);
-          console.log('Weather Data (city):', weatherData);
         }
 
         const forecastData = await fetchWeatherForecast(
@@ -92,11 +91,13 @@ const useWeather = () => {
         );
         if (forecastData) {
           setForecast(forecastData);
-          console.log('Forecast Data (city):', forecastData);
         }
       } catch (err) {
-        console.error('City weather fetch error:', err);
-        setError('Failed to fetch weather for the city.');
+        if (err.message.includes('Network')) {
+          setError('No internet connection. Please check your network.');
+        } else {
+          setError(err.message || 'Something went wrong');
+        }
       } finally {
         setIsLoading(false);
       }
@@ -113,7 +114,7 @@ const useWeather = () => {
         );
         return granted === PermissionsAndroid.RESULTS.GRANTED;
       } catch (err) {
-        console.warn(err);
+        setError(err.message);
         return false;
       }
     }
@@ -123,66 +124,57 @@ const useWeather = () => {
   const getCurrentLocation = async () => {
     setIsLoading(true);
     setError(null);
-    console.log('Requesting permission');
     const hasPermission = await requestLocationPermission();
     let lat = 34.6937;
     let lon = 135.5023;
-    console.log('Permission granted:', hasPermission);
 
     if (hasPermission) {
       Geolocation.getCurrentPosition(
         async position => {
-          console.log('Position fetched successfully:', position);
           lat = position.coords.latitude;
           lon = position.coords.longitude;
-          console.log(`Latitude: ${lat}, Longitude: ${lon}`);
 
           try {
             const weatherData = await fetchWeatherData(lat, lon);
             if (weatherData) {
               setLocation(weatherData.name);
               setCurrentData(weatherData);
-              console.log('Weather Data:', weatherData);
             }
 
             const ForecastData = await fetchWeatherForecast(lat, lon);
             if (ForecastData) {
               setForecast(ForecastData);
-              console.log('Forecast Data:', ForecastData);
             }
-          } catch (apiError) {
-            console.error('API Error:', apiError);
-            setError('Failed to fetch weather data.');
+          } catch (err) {
+            if (err.message.includes('Network')) {
+              setError('No internet connection. Please check your network.');
+            } else {
+              setError(err.message || 'Something went wrong');
+            }
           } finally {
             setIsLoading(false);
           }
         },
         error => {
-          console.error('Error getting location:', error);
-          console.log('Geolocation error object:', error);
-          setError('Failed to get location.');
+          setError(error.message || 'Failed to get location.');
           setIsLoading(false);
         },
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
       );
     } else {
-      console.log('Using default coordinates.');
       try {
         const weatherData = await fetchWeatherData(lat, lon);
         if (weatherData) {
           setLocation(weatherData.name);
           setCurrentData(weatherData);
-          console.log('Weather Data (default location):', weatherData);
         }
 
         const ForecastData = await fetchWeatherForecast(lat, lon);
         if (ForecastData) {
           setForecast(ForecastData);
-          console.log('Forecast Data (default location):', ForecastData);
         }
       } catch (apiError) {
-        console.error('API Error:', apiError);
-        setError('Failed to fetch weather data.');
+        setError(apiError.message || 'Failed to fetch weather data.');
       } finally {
         setIsLoading(false);
       }

@@ -117,6 +117,54 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  cityList: {
+    maxHeight: '60%',
+  },
+
+  cityItem: {
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+  },
+
+  cityText: {
+    color: 'white',
+    fontSize: 16,
+  },
+  ErrmodalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  errorModal: {
+    backgroundColor: '#222',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%',
+    alignItems: 'center',
+  },
+  errorTitle: {
+    fontSize: 20,
+    color: '#fff',
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  errorMessage: {
+    fontSize: 16,
+    color: '#ddd',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  dismissButton: {
+    backgroundColor: '#555',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 8,
+  },
+  dismissText: {
+    color: '#fff',
+    fontWeight: '600',
+  },
 });
 
 export default styles;
