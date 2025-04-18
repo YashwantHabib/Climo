@@ -36,10 +36,10 @@
 - Android Studio or Xcode for emulator/simulator
 - OpenWeather API Key (free from [openweathermap.org](https://openweathermap.org/api))
 
-### Installation
+### Step 1: Installation
 
 ````bash
-git clone https://github.com/your-username/climo.git
+git clone https://github.com/YashwantHabib/climo.git
 cd climo
 npm install
 
@@ -64,7 +64,7 @@ npm start
 yarn start
 ````
 
-## Step 2: Build and run your app
+## Step 2: Build and run app
 
 With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
 
