@@ -19,8 +19,6 @@
 | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | <img src="./screenshots/WeatherPage-Photoroom.png" alt="Home" width="200" /> | <img src="./screenshots/WeatherSlider-Photoroom.png" alt="Home" width="200" /> |
 
-> Add your screenshots in a `/screenshots` folder inside the project root.
-
 ---
 
 ## 🧰 Tech Stack
