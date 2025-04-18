@@ -6,7 +6,7 @@
 
 ## 📸 Screenshots
 
-<img src="./screenshots/climo-ss.png" alt="Home" width="200" />
+![Admin Panel](./screenshots/climo-ss.png)
 
 ---
 
