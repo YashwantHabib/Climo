@@ -4,20 +4,18 @@
 
 ---
 
+## 📸 Screenshots
+
+<img src="./screenshots/climo-ss.png" alt="Home" width="200" />
+
+---
+
 ## 🚀 Features
 
 - ⛅ Live weather data powered by OpenWeather API
 - 🎵 Interactive slider to control weather like music
 - 📱 Clean, responsive UI built with React Native
 - 🔄 Seamless city-based weather updates
-
----
-
-## 📸 Screenshots
-
-| Home Screen                                                                  | Weather Slider                                                                 |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| <img src="./screenshots/WeatherPage-Photoroom.png" alt="Home" width="200" /> | <img src="./screenshots/WeatherSlider-Photoroom.png" alt="Home" width="200" /> |
 
 ---
 
