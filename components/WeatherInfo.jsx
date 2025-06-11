@@ -55,17 +55,6 @@ const WeatherInfo = ({weather, fadeAnim}) => {
                 SUNSET: {formatTime(weather.sunset, weather.timezone)}
               </Text>
             </View>
-
-            {/* Bottom Info Block */}
-            <View style={styles.infoBlockBottom}>
-              <Text style={[styles.textInfo, styles.textInfoR]}>WIND</Text>
-              <Text style={[styles.textInfo, styles.textInfoR]}>
-                DEG: {weather.wind.deg}°
-              </Text>
-              <Text style={[styles.textInfo, styles.textInfoR]}>
-                SPEED: {weather.wind.speed}m/s
-              </Text>
-            </View>
           </TouchableOpacity>
         </View>
       </Modal>
