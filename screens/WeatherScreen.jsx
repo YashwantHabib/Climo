@@ -46,11 +46,6 @@ const WeatherScreen = ({navigation}) => {
         <Pressable onPress={() => setModalVisible(true)}>
           <Text style={[styles.text, styles.location]}>{location}</Text>
         </Pressable>
-        <Pressable
-          style={styles.icon}
-          onPress={() => navigation.navigate('Settings')}>
-          <Bolt color="white" size={24} />
-        </Pressable>
       </View>
 
       {/* Weather Info */}
